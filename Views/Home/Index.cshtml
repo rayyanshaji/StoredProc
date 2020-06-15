@@ -1,0 +1,74 @@
+﻿@model StoredProc.Models.PurchaseModel
+    ViewBag.Title = "get";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "myForm" }))
+{
+        <table border="1" width="500" height="300" bgcolor="white">
+            <tr>
+                <td>PurchaseOrderId No</td>
+                @*<td><input type="text" name="purchaseOrderId" value="@Model.PurchaseOrderId" /><input type="submit" name="search" value="Search" /><br /><font color="RED">@ViewBag.searchresult</font></td>*@
+                <td>@Html.TextBoxFor(model=>model.PurchaseOrderId , new { oninput = "checkinputstate();" })</td>
+                <td style="color:red;">@Html.ValidationMessageFor(model => model.PurchaseOrderId )</td>
+                <td> <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-default">Submit</button></td>
+            </tr>
+        </table>
+}
+
+<table>
+    <tr>
+        <td>Line Number</td>
+
+    </tr>
+    <tr>
+        <td>Unit Price</td>
+
+    </tr>
+
+    <tr>
+        <td>ProductID</td>
+
+    </tr>
+</table>
+
+<table style="width:100%">
+    <tr>
+        <th>LineNumber</th>
+        <th>UnitPrice</th>
+        <th>ProductID</th>
+        <th>Order QTY</th>
+        <th>Receieve QTY</th>
+        <th>Reject</th>
+        <th>Due Date</th>
+    </tr>
+    <tr>
+        <td> <p name="LineNumber">@Model.LineNumber</p> </td>
+        <td> <p name="UnitPrice">@Model.UnitPrice</p> </td>
+        <td> <p name="ProductID">@Model.ProductID</p> </td>
+        <td> <p name="ProductID">@Model.OrderQty</p> </td>
+        <td> <p name="ProductID">@Model.ReceivedQty</p> </td>
+        <td> <p name="ProductID">@Model.RejectedQty</p> </td>
+        <td> <p name="ProductID">@Model.DueDate</p> </td>
+    </tr>
+</table>
+
+<script>
+    var states = document.getElementById("PurchaseOrderId");
+    const form = document.getElementById("myForm");
+
+    var len = states.value.trim().length;
+    
+    function checkinputstate() {
+        console.log(len);
+        if (len == 0 || len == '' || len == null) {
+            states.style.borderColor = "red";
+        } else if (len > 0) {
+            states.style.borderColor = "green";
+        }
+    }
+</script>
+
